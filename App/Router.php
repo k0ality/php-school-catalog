@@ -18,6 +18,15 @@ class Router
 
     public function resolve(Request $request)
     {
-        //
+        $method = strtolower($request->getMethod());
+
+        $queryParams = $request->getQueryParams();
+
+        $route = '/';
+        if (!empty($queryParams['r'])) {
+            $route = $queryParams['r'];
+        }
+
+        return $this->routes[$method][$route];
     }
 }

@@ -3,9 +3,7 @@
 require __DIR__ . '/../bootstrap/bootstrap.php';
 
 $router = require __DIR__ . '/../routes/routes.php';
-pd($router);
-
+$app = new \App\Application($router);
 
 $request = new \App\Http\Request();
-
-pd($request->getMethod(), $request->getQueryParams());
+$app->handleRequest($request);
