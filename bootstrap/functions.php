@@ -11,3 +11,9 @@ function p()
 
     echo '</pre>';
 }
+
+function pd()
+{
+    call_user_func_array('p', func_get_args());
+    die;
+}

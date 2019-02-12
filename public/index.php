@@ -2,5 +2,6 @@
 
 require __DIR__ . '/../bootstrap/bootstrap.php';
 
+$request = new \App\Http\Request();
 
-p(123, "qwe", [1,2,3], ['qwe' => 'asd', 'zxc' => 23456], new PDO());
+pd($request->getMethod(), $request->getQueryParams()['r']);
