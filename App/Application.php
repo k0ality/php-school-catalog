@@ -19,6 +19,12 @@ class Application
     public function handleRequest(Request $request)
     {
         $data = $this->router->resolve($request);
-        pd($data);
+
+        $controllerClass = $data['controller'];
+        $controller = new $controllerClass;
+
+        $action = $data['action'];
+
+        $controller->$action($request->getQueryParams());
     }
 }

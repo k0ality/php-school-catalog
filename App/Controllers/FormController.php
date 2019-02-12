@@ -4,14 +4,14 @@ namespace App\Controllers;
 
 class FormController
 {
-    public function view($id)
+    public function view($params)
     {
-        //
+        echo 'Forms view ' . $params['id'];
     }
 
     public function index()
     {
-        //
+        echo 'Forms index';
     }
 
     public function update()
