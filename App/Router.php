@@ -24,7 +24,11 @@ class Router
 
         $route = '/';
         if (!empty($queryParams['r'])) {
-            $route = $queryParams['r'];
+            $route = '/' . ltrim($queryParams['r'], '/');
+        }
+
+        if (!isset($this->routes[$method][$route])) {
+            throw new \Exception('Route not found');
         }
 
         return $this->routes[$method][$route];
