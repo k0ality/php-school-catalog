@@ -6,7 +6,17 @@ use App\Http\Request;
 
 class Router
 {
-    public function route(Request $request)
+    protected $routes = [];
+
+    public function add($method, $route, $controller, $action)
+    {
+        $this->routes[$method][$route] = [
+            'controller' => $controller,
+            'action' => $action,
+        ];
+    }
+
+    public function resolve(Request $request)
     {
         //
     }
