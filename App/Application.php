@@ -5,6 +5,7 @@ namespace App;
 use App\Http\RequestInterface;
 use App\Http\RouteInterface;
 use App\Http\RouterInterface;
+use App\View\ViewInterface;
 
 class Application
 {
@@ -27,8 +28,8 @@ class Application
         $route = $this->resolve($request);
         $controller = $this->resolveController($route);
         $action = $this->resolveAction($route, $controller);
-        $result = $this->exec($controller, $action, $request);
-        $this->render($result);
+        $view = $this->exec($controller, $action, $request);
+        $this->render($view);
     }
 
     protected function resolve(RequestInterface $request)
@@ -67,13 +68,13 @@ class Application
         throw new \Exception('Controller Action not found');
     }
 
-    protected function exec($controller, $action, RequestInterface $request)
+    protected function exec($controller, $action, RequestInterface $request) : ViewInterface
     {
         return $controller->$action($request->getQueryParams());
     }
 
-    protected function render($result)
+    protected function render(ViewInterface $view)
     {
-        echo $result;
+        echo $view->render();
     }
 }

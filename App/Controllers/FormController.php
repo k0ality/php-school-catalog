@@ -2,16 +2,18 @@
 
 namespace App\Controllers;
 
+use App\View\StringView;
+
 class FormController
 {
     public function view($params)
     {
-        return 'Forms view ' . $params['id'];
+        return new StringView('Forms view ' . $params['id']);
     }
 
     public function index()
     {
-        return 'Forms index';
+        return new StringView('Forms index');
     }
 
     public function update()

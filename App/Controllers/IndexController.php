@@ -2,10 +2,12 @@
 
 namespace App\Controllers;
 
+use App\View\StringView;
+
 class IndexController
 {
     public function index()
     {
-        return "Hi! Index.";
+        return new StringView("Hi! Index.");
     }
 }
