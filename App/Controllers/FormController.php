@@ -6,12 +6,12 @@ class FormController
 {
     public function view($params)
     {
-        echo 'Forms view ' . $params['id'];
+        return 'Forms view ' . $params['id'];
     }
 
     public function index()
     {
-        echo 'Forms index';
+        return 'Forms index';
     }
 
     public function update()

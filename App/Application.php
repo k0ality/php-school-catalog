@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Http\RequestInterface;
+use App\Http\RouteInterface;
 use App\Http\RouterInterface;
 
 class Application
@@ -17,15 +18,62 @@ class Application
         $this->router = $router;
     }
 
+    /**
+     * @param RequestInterface $request
+     * @throws \Exception
+     */
     public function handleRequest(RequestInterface $request)
     {
-        $data = $this->router->resolve($request);
+        $route = $this->resolve($request);
+        $controller = $this->resolveController($route);
+        $action = $this->resolveAction($route, $controller);
+        $result = $this->exec($controller, $action, $request);
+        $this->render($result);
+    }
 
-        $controllerClass = $data['controller'];
-        $controller = new $controllerClass;
+    protected function resolve(RequestInterface $request)
+    {
+        return $this->router->resolve($request);
+    }
 
-        $action = $data['action'];
+    /**
+     * @param RouteInterface $route
+     * @return mixed
+     * @throws \Exception
+     */
+    protected function resolveController(RouteInterface $route)
+    {
+        $controllerClass = $route->getClassName();
 
-        $controller->$action($request->getQueryParams());
+        if (class_exists($controllerClass)) {
+            return new $controllerClass;
+        }
+
+        throw new \Exception('Controller class is not exists');
+    }
+
+    /**
+     * @param RouteInterface $route
+     * @param $controller
+     * @return mixed
+     * @throws \Exception
+     */
+    protected function resolveAction(RouteInterface $route, $controller)
+    {
+        if (method_exists($controller, $route->getAction())) {
+            return $route->getAction();
+        }
+
+        throw new \Exception('Controller Action not found');
+    }
+
+    protected function exec($controller, $action, RequestInterface $request)
+    {
+        return $controller->$action($request->getQueryParams());
+    }
+
+    protected function render($result)
+    {
+        echo $result;
     }
 }

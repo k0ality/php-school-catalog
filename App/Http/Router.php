@@ -13,9 +13,10 @@ class Router implements RouterInterface
             'controller' => $controller,
             'action' => $action,
         ];
+        $this->routes[$method][$route] = new Route($controller, $action);
     }
 
-    public function resolve(RequestInterface $request)
+    public function resolve(RequestInterface $request) : RouteInterface
     {
         $method = $request->getMethod();
         $route = $request->getPath();
