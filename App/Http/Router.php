@@ -8,6 +8,7 @@ class Router implements RouterInterface
 
     public function add(string $method, string $route, string $controller, string $action)
     {
+        $method = strtoupper($method);
         $this->routes[$method][$route] = [
             'controller' => $controller,
             'action' => $action,
@@ -16,19 +17,13 @@ class Router implements RouterInterface
 
     public function resolve(RequestInterface $request)
     {
-        $method = strtolower($request->getMethod());
+        $method = $request->getMethod();
+        $route = $request->getPath();
 
-        $queryParams = $request->getQueryParams();
-
-        $route = '/';
-        if (!empty($queryParams['r'])) {
-            $route = '/' . ltrim($queryParams['r'], '/');
+        if (!empty($this->routes[$method][$route])) {
+            return $this->routes[$method][$route];
         }
 
-        if (!isset($this->routes[$method][$route])) {
-            throw new \Exception('Route not found');
-        }
-
-        return $this->routes[$method][$route];
+        throw new \Exception('Route not found');
     }
 }

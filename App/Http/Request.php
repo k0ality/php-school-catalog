@@ -13,4 +13,10 @@ class Request implements RequestInterface
     {
         return $_SERVER['REQUEST_METHOD'];
     }
+
+    public function getPath()
+    {
+        $parts = explode('?', $_SERVER['REQUEST_URI'], 2);
+        return $parts[0];
+    }
 }
