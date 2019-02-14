@@ -4,7 +4,6 @@ services:
 
   php:
     image: vsguts/php71-fpm:1.0.0
-    #image: php:7.2-fpm
     volumes:
       - .:/app
       - ./docker/logs/php:/var/log/php

@@ -2,21 +2,22 @@
 
 namespace App;
 
-use App\Http\Request;
+use App\Http\RequestInterface;
+use App\Http\RouterInterface;
 
 class Application
 {
     /**
-     * @var Router
+     * @var RouterInterface
      */
     protected $router;
 
-    public function __construct(Router $router)
+    public function __construct(RouterInterface $router)
     {
         $this->router = $router;
     }
 
-    public function handleRequest(Request $request)
+    public function handleRequest(RequestInterface $request)
     {
         $data = $this->router->resolve($request);
 

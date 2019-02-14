@@ -2,7 +2,7 @@
 
 namespace App\Http;
 
-class Request
+class Request implements RequestInterface
 {
     public function getQueryParams()
     {

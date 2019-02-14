@@ -1,9 +1,13 @@
 <?php
 
-$router = new \App\Router();
+use App\Controllers\FormController;
+use App\Controllers\IndexController;
+use App\Http\Router;
 
-$router->add('get', '/', \App\Controllers\IndexController::class, 'index');
-$router->add('get', '/forms', \App\Controllers\FormController::class, 'index');
-$router->add('get', '/forms/view', \App\Controllers\FormController::class, 'view');
+$router = new Router();
+
+$router->add('get', '/', IndexController::class, 'index');
+$router->add('get', '/forms', FormController::class, 'index');
+$router->add('get', '/forms/view', FormController::class, 'view');
 
 return $router;

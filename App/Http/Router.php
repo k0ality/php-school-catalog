@@ -1,14 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Http;
 
-use App\Http\Request;
-
-class Router
+class Router implements RouterInterface
 {
     protected $routes = [];
 
-    public function add($method, $route, $controller, $action)
+    public function add(string $method, string $route, string $controller, string $action)
     {
         $this->routes[$method][$route] = [
             'controller' => $controller,
@@ -16,7 +14,7 @@ class Router
         ];
     }
 
-    public function resolve(Request $request)
+    public function resolve(RequestInterface $request)
     {
         $method = strtolower($request->getMethod());
 
