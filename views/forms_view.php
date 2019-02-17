@@ -1,9 +1,6 @@
 <?php
-
 $title = 'Main form';
-
 ?>
-
 
 <h1>Hello.</h1>
 
