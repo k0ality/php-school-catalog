@@ -9,6 +9,6 @@ class IndexController
 {
     public function index()
     {
-        return new TemplateView('forms_view', ['title' => 'Testttt', 'content' => 'forms_view']);
+        return new TemplateView('forms_view', ['title' => 'Testttt', 'data' => 'smth_from_controller']);
     }
 }
