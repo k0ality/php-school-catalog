@@ -5,10 +5,6 @@
 Чтобы в контроллере можно было сделать вот так:
 return new TemplateView('forms_view', ['title' => 'Title value', 'content' => 'Content value']);
 */
-//TODO template inheritance
-//1. render content, extract title
-//2. then render layout (base) and include content
-//3. print layout
 
 namespace App\View;
 
